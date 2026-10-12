@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { errorMessage } from "../api";
 
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, onShowSignup, message }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -25,6 +25,7 @@ export default function Login({ onLogin }) {
         <h1>Product Management</h1>
         <p className="muted">Sign in to manage your products</p>
 
+        {message && <div className="alert ok">{message}</div>}
         {error && <div className="alert">{error}</div>}
 
         <label>
@@ -39,6 +40,9 @@ export default function Login({ onLogin }) {
         <button className="btn primary" disabled={loading}>
           {loading ? "Signing in…" : "Login"}
         </button>
+        <p className="auth-switch">
+          Don’t have an account? <button type="button" className="text-button" onClick={onShowSignup}>Sign up</button>
+        </p>
       </form>
     </div>
   );
